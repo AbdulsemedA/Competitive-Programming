@@ -1,9 +1,13 @@
 class Solution:
     def addSpaces(self, s: str, spaces: List[int]) -> str:
-        arr = [item for item in s]
+        total = ''
+        current = 0
         
         for item in spaces:
-            arr[item] = " " + arr[item]
+            total += s[current:item] + " "
+            current = item
             
-        return ''.join(arr)
+        total += s[current:]
+            
+        return total
         
