@@ -4,10 +4,15 @@ class Solution:
         m = len(grid[0])
         zeros_col = []
         ones_col = []
+        zeros_row = []
+        ones_row  = []
         
         diff = [[0 for _ in range(m)] for _ in range(n)]
-        zeros_row = [(m - grid[i].count(1)) for i in range(n)]
-        ones_row = [grid[i].count(1) for i in range(n)]
+        
+        for item in grid:
+            total = sum(item)
+            ones_row.append(total)
+            zeros_row.append(m - total)
         
         for col in range(m):
             ones_col.append(0)
