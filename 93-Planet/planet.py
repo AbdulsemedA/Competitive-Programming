@@ -13,7 +13,6 @@ def planet(lists,K):
     
     print(result)
     
-
 N = int(input())
 
 for _ in range(N):
