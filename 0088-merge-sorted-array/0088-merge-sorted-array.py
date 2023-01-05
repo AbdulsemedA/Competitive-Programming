@@ -17,11 +17,11 @@ class Solution:
                 B -= 1
                 A -= 1
                 
-        if C > -1:
-            while C > -1:
-                nums1[B] = nums2[C]
-                C -= 1
-                B -= 1
+        
+        while C > -1:
+            nums1[B] = nums2[C]
+            C -= 1
+            B -= 1
         
                 
         
