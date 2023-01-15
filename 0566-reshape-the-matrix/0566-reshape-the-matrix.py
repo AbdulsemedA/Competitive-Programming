@@ -7,7 +7,6 @@ class Solution:
         else:
             flat = []
             answer = []
-            
             for rw in range(row):
                 for cl in range(col):
                     flat.append(mat[rw][cl])
