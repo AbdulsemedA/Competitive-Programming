@@ -1,8 +1,10 @@
 class Solution:
     def validMountainArray(self, arr: List[int]) -> bool:
-        peaks = []
         n = len(arr)
-        for item in range(1, n - 1,1):
+        if n < 3:
+            return False
+        
+        for item in range(1, n - 1, 1):
             if arr[item] > arr[item - 1] and arr[item] > arr[item + 1]:
                 i = 0
                 flag = True
@@ -21,9 +23,7 @@ class Solution:
                         flag = False
                         break
                 if flag:
-                    peaks.append(item)
+                    return True
                     
-        if not(peaks):
-            return False
-        return True
+        return False
         
