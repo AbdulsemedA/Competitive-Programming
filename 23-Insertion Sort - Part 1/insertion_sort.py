@@ -6,16 +6,7 @@ import random
 import re
 import sys
 
-#
-# Complete the 'insertionSort1' function below.
-#
-# The function accepts following parameters:
-#  1. INTEGER n
-#  2. INTEGER_ARRAY arr
-#
-
 def insertionSort1(n, arr):
-    # Write your code here
     my_num = arr[n-1]
     k = n - 2
     while (my_num < arr[k]) and (k >= 0):
