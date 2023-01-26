@@ -3,7 +3,30 @@ class Solution:
         n = len(nums)
         k %= n
         
-        nums.reverse()
-        nums[:k] = nums[:k][::-1]
-        nums[k:] = nums[k:][::-1]
+        #reverse the list
+        left = 0
+        right = n - 1
+
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
+
+        # reverse back the round rotated elements
+        left = 0
+        right = k - 1
+
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
+
+        # reverse back the original elements
+        left = k
+        right = n - 1
+
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
         
