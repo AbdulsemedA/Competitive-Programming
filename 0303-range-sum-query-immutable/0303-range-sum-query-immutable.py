@@ -1,7 +1,6 @@
 class NumArray:
 
     def __init__(self, nums: List[int]):
-        self.nums = nums
         self.prefix = [0]
         
         for i in range(len(nums)):
