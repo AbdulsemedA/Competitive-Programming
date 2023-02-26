@@ -22,9 +22,9 @@ class Solution:
             freq_S2[s2[right]] = 1 + freq_S2.get(s2[right], 0)
             
             right += 1
-        
-        if freq_S1 == freq_S2:
-            return True
+            
+            if right == len(s2) and freq_S1 == freq_S2:
+                return True
         
         return False
             
