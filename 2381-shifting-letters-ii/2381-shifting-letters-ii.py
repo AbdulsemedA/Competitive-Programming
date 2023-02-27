@@ -1,6 +1,6 @@
 class Solution:
     def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
-        n = len(s)
+        n, curr = len(s), 0
         prefix = [0] * (n+1)
         
         for left, right, path in shifts:
@@ -11,7 +11,6 @@ class Solution:
                 prefix[left] -= 1
                 prefix[right + 1] += 1
                 
-        curr = 0
         prefix.pop()
         
         for i in range(1, n):
