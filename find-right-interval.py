@@ -1,27 +1,25 @@
 class Solution:
     def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
-        st = [intervals[i][0] for i in range(len(intervals))]
-        end = [intervals[i][1] for i in range(len(intervals))]
-        N = max(st)
+        st = [[idx,i[0]] for idx, i in enumerate(intervals)]
         size = len(st)
-        start = sorted(st)
+        end = [i[1] for i in intervals]
+        st.sort(key = lambda x: x[1])
+        # print(end)
+        N = st[-1][1]
 
         for i in range(size):
-            if size == 1:
-                end[i] = -1
-                break
-            if end[i] > N:
+            if size == 1 or end[i] > N:
                 end[i] = -1
             else:
-                left = 0
-                right = size - 1
+                l = 0
+                r = size - 1
 
-                while left <= right:
-                    mid = left + (right - left) // 2
-                    if end[i] <= start[mid]:
-                        right = mid - 1
+                while l <= r:
+                    mid = l + (r - l) // 2
+                    if end[i] <= st[mid][1]:
+                        r = mid - 1
                     else:
-                        left = mid + 1
-                end[i] = st.index(start[left])
+                        l = mid + 1
+                end[i] = st[l][0]
         
         return end
