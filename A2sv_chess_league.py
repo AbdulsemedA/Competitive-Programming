@@ -1,36 +1,30 @@
-
 n, k = map(int, input().split())
 arr = list(map(int, input().split()))
+players = [(arr[i], i) for i in range(2**n)]
 
-def solve(i, count, k):
-    if count == 1:
-        return [i]
+def merge(a1, a2):
+    l1 = l2 = 0
+    new_arr = []
 
-    left = solve(i, count // 2, k)
-    right = solve(i + (count // 2), count // 2, k)
-
-    merged = []
-    l_ptr = r_ptr = 0
-    left_min, right_min = arr[left[0]], arr[right[0]]
-
-    while l_ptr < len(left) and r_ptr < len(right):
-        if arr[left[l_ptr]] <= arr[right[r_ptr]]:
-            if right_min - arr[left[l_ptr]] <= k:
-                merged.append(left[l_ptr])
-            l_ptr += 1
+    while l1 < len(a1) or l2 < len(a2):
+        num1, idx1 = a1[l1] if l1 < len(a1) else (float('inf'), idx1)
+        num2, idx2 = a2[l2] if l2 < len(a2) else (float('inf'), idx2)
+        if num1 <= num2:
+            if a2[0][0] - k <= num1: new_arr.append(tuple([num1, idx1]))
+            l1 += 1
         else:
-            if left_min - arr[right[r_ptr]] <= k:
-                merged.append(right[r_ptr])
-            r_ptr += 1
+            if a1[0][0] - k <= num2: new_arr.append(tuple([num2, idx2]))
+            l2 += 1
 
-    while l_ptr < len(left) and right_min - arr[left[l_ptr]] <= k:
-        merged.append(left[l_ptr])
-        l_ptr += 1
+    return new_arr
 
-    while r_ptr < len(right) and left_min - arr[right[r_ptr]] <= k:
-        merged.append(right[r_ptr])
-        r_ptr += 1
+def mergeSort(players):
+    if len(players) <= 1:
+        return players
+    mid = len(players) // 2
+    left = mergeSort(players[:mid])
+    right = mergeSort(players[mid:])
+    return merge(left, right)
 
-    return merged
-
-print(*sorted(map(lambda x: x + 1, solve(0, 2**n, k))))
+winner = mergeSort(players)
+print(*([i[1] + 1 for i in sorted(winner, key = lambda x: x[1])]))
