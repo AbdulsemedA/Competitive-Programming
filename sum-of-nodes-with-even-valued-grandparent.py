@@ -5,32 +5,23 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def __init__(self):
-        self.size = 0
-        self.total = 0
-        
     def sumEvenGrandparent(self, root: TreeNode) -> int:
+        total = 0
+
         def travel(root, curr):
-            if not root:
-                return root
+            nonlocal total
+
+            if not root: return
             curr.append(root.val)
-            print(curr)
-            self.size += 1
+
             left = travel(root.left, curr)
             right = travel(root.right, curr)
-            if not root.left and not root.right:
-                if self.size >= 3:
-                    if curr[-3] % 2 == 0:
-                        self.total += curr[-1]
-                curr.pop()
-                self.size -= 1
-                return
-            if self.size >= 3:
-                if curr[-3] % 2 == 0:
-                    self.total += curr[-1]
-            curr.pop()
-            self.size -= 1
-            
-        path = travel(root, [])
 
-        return self.total
+            if len(curr) >= 3:
+                if curr[-3] % 2 == 0:
+                    total += curr[-1]
+            curr.pop()
+            
+        travel(root, [])
+
+        return total
