@@ -1,17 +1,17 @@
 tc = int(input())
 for _ in range(tc):
     n = int(input())
-    array = list(map(int, input().split()))
-    size = len(array)
-    curr = array[:]
+    arr = list(map(int, input().split()))
+    size = len(arr)
+    curr = arr[:]
 
     while size > 1:
-        array = curr[:]
-        size = len(array)
+        arr = curr[:]
+        size = len(arr)
         curr = []
-        left, right = 0, len(array) - 1
+        left, right = 0, len(arr) - 1
         while left <= right:
-            curr.append(array[left] & array[right])
+            curr.append(arr[left] & arr[right])
             left += 1
             right -= 1
-    print(array[0])
+    print(arr[0])
