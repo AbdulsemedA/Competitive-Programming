@@ -10,7 +10,7 @@ class Solution:
 
             count = dp(idx + 1)
             if idx < n - 1:
-                if int(s[idx]) == 1 or (int(s[idx]) == 2 and int(s[idx + 1]) <= 6):
+                if int(s[idx]) and int(s[idx: idx + 2])in range(1, 27):
                     count += dp(idx + 2)
 
             memo[idx] = count
