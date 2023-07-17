@@ -7,3 +7,5 @@ N, K = map(int,input().split())
 temp = input()
 myarr = [(str(temp[i]),i) for i in range(len(temp))]
 remover(myarr,K)
+
+# that's it
