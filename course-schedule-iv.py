@@ -1,34 +1,25 @@
 class Solution:
     def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
-        graph = defaultdict(list)
-        path_exist = [set() for i in range(numCourses)]
-        degree = defaultdict(int)
-        queue = deque()
-
-        for src, des in prerequisites:
-            graph[src].append(des)
-            degree[des] += 1
-       
-        for ele in range(numCourses):
-            if not degree[ele]:
-                queue.append(ele)
+        n = numCourses
+        dist = [[float('inf')] * n for _ in range(n)]
         
-        while queue:
-            curr = queue.popleft()
+        for i, j in prerequisites:
+            dist[i][j] = 1
 
-            for ele in graph[curr]:
-                degree[ele] -= 1
+        for i in range(n):
+            dist[i][i] = 0
 
-                if not degree[ele]:
-                    queue.append(ele)
-
-                path_exist[ele].add(curr)
-                path_exist[ele].update(path_exist[curr])
+        for k in range(n):
+            for i in range(n):
+                for j in range(n):
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
         
-        answer = [False] * len(queries)
+        ans = []
 
-        for idx, [u, v] in enumerate(queries):
-            if u in path_exist[v]:
-                answer[idx] = True
+        for u, v in queries:
+            if dist[u][v] == float('inf'):
+                ans.append(False)
+            else:
+                ans.append(True)
         
-        return answer
+        return ans
