@@ -15,5 +15,3 @@ class Solution:
             if arr[i] <= arr[i-1]:
                 return False
         return True
-
-            # return inorder(root) == sorted(inorder(root))
