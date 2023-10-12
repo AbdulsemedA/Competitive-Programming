@@ -10,12 +10,16 @@ class Solution:
         
         def pathSum(root, curr, val):
             nonlocal counts
+            
             if not root: return
+            
             curr += root.val
             value = val.copy()
             value[curr] = 1 + value.get(curr, 0)
 
-            if len(value) > 0 and curr == targetSum: counts += 1
+            if len(value) > 0 and curr == targetSum: 
+                counts += 1
+                
             if curr - targetSum in val:
                 counts += val[curr - targetSum]
             
