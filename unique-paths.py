@@ -1,21 +1,11 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        memo = defaultdict(int)
-        direction = [(1,0), (0, 1)]
+        dp = [[0] * n for _ in range(m)]
+        dp[0][0] = 1
 
-        def inbound(x, y):
-            return 0 <= x < m and 0 <= y < n
+        for i in range(m):
+            for j in range(n):
+                if i or j:
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1]
         
-        def dp(i, j):
-            if (i, j) in memo: return memo[(i, j)]
-            if (i, j) == (m - 1, n - 1): return 1
-            
-            for x, y in direction:
-                a, b = i + x, j + y
-                
-                if inbound(a, b):
-                    memo[(i, j)] += dp(a, b)
-            
-            return memo[(i, j)]
-        
-        return dp(0, 0)
+        return dp[m-1][n-1]
